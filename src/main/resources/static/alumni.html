@@ -1,0 +1,89 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>校友信息系统</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./js/alumni.js"></script>
+
+    <style>
+        body{
+            background-color: black;
+        }
+        /*table tbody {*/
+
+            /*display:block;*/
+
+            /*height:600px;*/
+
+            /*overflow-y:scroll;*/
+
+        /*}*/
+
+        /*table thead, tbody tr {*/
+
+            /*display:table;*/
+
+            /*width:100%;*/
+
+            /*table-layout:fixed;*/
+
+        /*}*/
+
+        /*table thead {*/
+            /**/
+
+        /*}*/
+    </style>
+</head>
+
+<body>
+<!--<h1  style="background-color:white;color: black" align="center">欢迎来到校友信息系统</h1>-->
+<div style="top:20px;left:30%;z-index:99">
+    <div style="text-align:center;">
+        <button  style="font-weight:bold;text-align:center;background-color:white;color: black;font-size:32px" align="center">欢迎来到校友信息系统</button>
+    </div>
+    <br>
+    <div align="center">
+        <button id="new" style="background-color: grey">新增记录</button>
+        <button id="update" style="background-color: grey">重新生成1000条记录</button>
+        <button id="search" style="background-color: grey">查询</button>
+        <button id="download" style="background-color: grey">下载</button>
+        <button id="exit" style="background-color:black;color: red;border:none">退出登陆</button>
+    </div>
+</div>
+<div style="position:fixed;top:20px;left:30%;z-index:9;background-color: black">
+
+</div>
+
+
+
+
+<table  width="100%"  border="0" style="font-size: 10px;color: white">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>生日</th>
+        <th>入学年份</th>
+        <th>毕业年份</th>
+        <th>工作城市/地区</th>
+        <th>工作单位</th>
+        <th>职务</th>
+        <th>手机</th>
+        <th>邮箱</th>
+        <th>微信</th>
+        <th>
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody id="tbody">
+
+    </tbody>
+</table>
+
+</body>
+</html>

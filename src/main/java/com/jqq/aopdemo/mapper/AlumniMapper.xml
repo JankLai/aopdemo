@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jqq.aopdemo.mapper.AlumniMapper" >
+    <resultMap id="alumni" type="com.jqq.aopdemo.entity.Alumni" >
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="sex" property="sex" />
+        <result column="birthday" property="birthday" />
+        <result column="in_school_date" property="inSchoolDate" />
+        <result column="out_school_date" property="outSchoolDate" />
+        <result column="working_city" property="workingCity" />
+        <result column="working_unit" property="workingUnit" />
+        <result column="job" property="job" />
+        <result column="phone_num" property="phoneNum" />
+        <result column="email" property="email" />
+        <result column="wechat" property="wechat" />
+    </resultMap>
+
+    <select id="selectAllAlumni" resultMap="alumni">
+            select
+            id,
+            name,
+            sex,
+            birthday,
+            IN_SCHOOL_DATE,
+            OUT_SCHOOL_DATE,
+            WORKING_CITY,
+            WORKING_UNIT,
+            job,
+            PHONE_NUM,
+            email,
+            wechat
+            from alumni;
+    </select>
+    <select id="selectAlumniByID" resultMap="alumni">
+            select
+            id,
+            name,
+            sex,
+            birthday,
+            IN_SCHOOL_DATE,
+            OUT_SCHOOL_DATE,
+            WORKING_CITY,
+            WORKING_UNIT,
+            job,
+            PHONE_NUM,
+            email,
+            wechat
+            from alumni
+            where id=#{alumniId};
+    </select>
+
+    <insert id="insertAlumni" keyColumn="id" keyProperty="alumni.id" useGeneratedKeys="true">
+        INSERT INTO alumni(
+          NAME,
+          SEX,
+          BIRTHDAY,
+          IN_SCHOOL_DATE,
+          OUT_SCHOOL_DATE,
+          WORKING_CITY,
+          WORKING_UNIT,
+          JOB,
+          PHONE_NUM,
+          EMAIL,
+          WECHAT
+        )
+        VALUES (#{alumni.name},
+        #{alumni.sex},
+        #{alumni.birthday},
+        #{alumni.inSchoolDate},
+        #{alumni.outSchoolDate},
+        #{alumni.workingCity},
+        #{alumni.workingUnit},
+        #{alumni.job},
+        #{alumni.phoneNum},
+        #{alumni.email},
+        #{alumni.wechat}
+        );
+    </insert>
+
+    <update id="updateAlumniByID">
+        UPDATE alumni
+        SET
+        name=#{alumni.name},
+        sex=#{alumni.sex},
+        birthday=#{alumni.birthday},
+        in_school_date=#{alumni.inSchoolDate},
+        out_school_date=#{alumni.outSchoolDate},
+        working_city=#{alumni.workingCity},
+        working_unit=#{alumni.workingUnit},
+        job=#{alumni.job},
+        phone_num=#{alumni.phoneNum},
+        email=#{alumni.email},
+        wechat=#{alumni.wechat}
+        WHERE id = #{alumniId}
+    </update>
+
+    <delete id="deleteAlumniById">
+        delete
+        from alumni
+        where id=#{alumniId};
+    </delete>
+
+    <delete id="deleteAllAlumni">
+        delete from alumni;
+    </delete>
+
+    <insert id="initAlumni" parameterType="java.util.List" keyProperty="id" useGeneratedKeys="true">
+        <selectKey resultType="java.lang.Integer" keyProperty="id"
+                   order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into alumni
+        (name,
+        sex,
+        birthday,
+        in_school_date,
+        out_school_date,
+        working_city,
+        working_unit,
+        job,
+        phone_num,
+        email,
+        wechat)
+        values
+        <foreach collection="alumniList" item="alumni" index="index" separator=",">
+            (
+            #{alumni.name},
+            #{alumni.sex},
+            #{alumni.birthday},
+            #{alumni.inSchoolDate},
+            #{alumni.outSchoolDate},
+            #{alumni.workingCity},
+            #{alumni.workingUnit},
+            #{alumni.job},
+            #{alumni.phoneNum},
+            #{alumni.email},
+            #{alumni.wechat}
+            )
+        </foreach>
+    </insert>
+</mapper>

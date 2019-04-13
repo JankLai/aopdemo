@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=chrome">
+    <title>校友信息系统</title>
+</head>
+<style type="text/css">
+    body {
+        font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+        font-size: 15px;
+    }
+
+    p, h1, form, button {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .spacer {
+        clear: both;
+        height: 1px;
+    }
+
+    /* ———– My Form ———– */
+    .myform {
+        margin: 0 auto;
+        width: 400px;
+        padding: 14px;
+    }
+
+    /* ———– stylized ———– */
+    #stylized {
+        border: solid 2px #b7ddf2;
+        background: #ebf4fb;
+    }
+
+    #stylized h1 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    #stylized p {
+        font-size: 12px;
+        color: #666666;
+        margin-bottom: 20px;
+        border-bottom: solid 1px #b7ddf2;
+        padding-bottom: 10px;
+    }
+
+    #stylized label {
+        display: block;
+        font-weight: bold;
+        text-align: right;
+        width: 140px;
+        float: left;
+    }
+
+    #stylized .small {
+        color: #666666;
+        display: block;
+        font-size: 11px;
+        font-weight: normal;
+        text-align: right;
+        width: 140px;
+    }
+
+    #stylized input {
+        float: left;
+        font-size: 15px;
+        padding: 4px 2px;
+        border: solid 1px #aacfe4;
+        width: 200px;
+        margin: 2px 0 20px 10px;
+    }
+
+    #stylized .sub {
+        clear: both;
+        margin-left: 150px;
+        width: 120px;
+        height: 32px;
+        line-height: 20px;
+        border: 1px solid #8b9c56;
+        background: url("../images/bt_bg.gif") 0px -64px;
+        text-align: center;
+        color: #336600;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .red {
+        color: #ff0000;
+    }
+
+    .blue {
+        color: #0000FF;
+    }
+</style>
+
+</head>
+<body>
+
+<div id="stylized" class="myform">
+    <form id="form" name="form" method="post" action="index.php">
+        <h1 align="center" style="color: green;">修改校友信息</h1>
+        <p><span id="alumni_p"></span></p>
+        <label>姓名
+        </label>
+        <input type="text" name="name" id="name" value=""/>
+
+        <label>
+            性别
+        </label>
+        <input type="text" name="sex" id="sex" value=""/>
+
+        <label>
+            生日
+        </label>
+        <input type="text" name="bir" id="bir" value=""/>
+
+        <label>
+            入学日期
+        </label>
+        <input type="text" name="in" id="in" value=""/>
+
+        <label>
+            毕业年份
+        </label>
+        <input type="text" name="out" id="out" value=""/>
+
+        <label>
+            工作城市/地区
+        </label>
+        <input type="text" name="city" id="city" value=""/>
+
+        <label>
+            工作单位
+        </label>
+        <input type="text" name="unit" id="unit" value=""/>
+
+        <label>
+            工作
+        </label>
+        <input type="text" name="job" id="job" value=""/>
+
+        <label>
+            手机号码
+        </label>
+        <input type="text" name="phone" id="phone" value=""/>
+
+        <label>
+            邮箱
+        </label>
+        <input type="text" name="email" id="email" value=""/>
+        <label>
+            微信号
+        </label>
+        <input type="text" name="wechat" id="wechat" value=""/>
+
+
+
+
+
+        <input class="sub" type="button" value="提交"/>
+        <div class="spacer"></div>
+
+    </form>
+</div>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script src="./js/modify.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jqq.aopdemo.mapper.AdminMapper" >
+
+    <resultMap id="admin" type="com.jqq.aopdemo.entity.Admin" >
+        <result column="id" property="id" />
+        <result column="password" property="password" />
+    </resultMap>
+
+    <select id="selectAllAdmin" resultMap="admin">
+        SELECT
+        id,
+        password
+        FROM admin;
+    </select>
+
+    <select id="selectAdminById" resultMap="admin">
+        SELECT
+        id,
+        password
+        FROM admin
+        WHERE id= #{adminId};
+    </select>
+
+    <select id="selectAdmin" resultMap="admin">
+        SELECT
+        id,
+        password
+        FROM admin
+        WHERE id= #{adminId} AND password=#{password};
+    </select>
+
+    <insert id="initAdmins" parameterType="java.util.List" keyProperty="id" useGeneratedKeys="true">
+        <selectKey resultType="java.lang.Integer" keyProperty="id"
+                   order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into admin
+        (password)
+        values 
+        <foreach collection="adminList" item="admin" index="index" separator=",">
+            (
+            #{admin.password}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteAllAdmin">
+        delete from admin;
+    </delete>
+</mapper>
