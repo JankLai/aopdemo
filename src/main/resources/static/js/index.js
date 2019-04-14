@@ -2,6 +2,17 @@
 // 1、点击Button按钮，先执行OnClientClick客户端脚本，return true时进行页面回发。
 // 2、使用Ajax异步请求，回调函数接收数据之前，页面已经回发了。原来的页面已经不存在，上哪接收异步请求返回的结果。
 window.onload=function (ev) {
+    $.ajax({
+        async:false,
+        type: "POST",
+        url: "/admin/init",
+        success: function (response) {
+
+        },
+        error:function () {
+            alert("出现错误!");
+        }
+    });
     bind();
 }
 

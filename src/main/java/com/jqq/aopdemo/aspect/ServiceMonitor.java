@@ -1,27 +1,9 @@
-/*
- * Copyright 2012-2019 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.jqq.aopdemo.aspect;
 
 import com.jqq.aopdemo.entity.Alumni;
 import com.jqq.aopdemo.utils.InsertlogUtil;
 import com.jqq.aopdemo.utils.UserlogUtil;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -49,10 +31,6 @@ public class ServiceMonitor {
     private InsertlogUtil insertlogUtil;
 
     private Logger logger=LoggerFactory.getLogger(ServiceMonitor.class);
-//	@AfterReturning("execution(* com.jqq.aopdemo.*.*.*(..))")
-//	public void logServiceAccess(JoinPoint joinPoint) {
-//		System.out.println("Completed: " + joinPoint);
-//	}
 
     @Around("execution(* com.jqq.aopdemo.controller.AdminController.selectAdmin(..))")
     public Object login(ProceedingJoinPoint joinPoint) throws Throwable

@@ -1,4 +1,4 @@
-package com.jqq.aopdemo.mybatis_config;
+package com.jqq.aopdemo.config;
 
 
 
