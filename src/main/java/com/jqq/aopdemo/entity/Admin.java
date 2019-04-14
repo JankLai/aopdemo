@@ -1,5 +1,6 @@
 package com.jqq.aopdemo.entity;
 
+import org.springframework.stereotype.Component;
 
 public class Admin {
     int id;
