@@ -51,10 +51,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()// 对请求授权
                 // error  127.0.0.1 将您重定向的次数过多
-                .antMatchers("/index.html", "/authentication/require",
+                .antMatchers("/index.html","/**","/js/**","/authentication/require",
                         "/authentication/form").permitAll()// 这些页面不需要身份认证,其他请求需要认证
-                .anyRequest() // 任何请求
-                .authenticated()//; // 都需要身份认证
+                .anyRequest().permitAll() // 任何请求
+//                .authenticated()//; // 都需要身份认证
                 .and()
                 .csrf().disable();// 禁用跨站攻击
 //                .csrf().disable()

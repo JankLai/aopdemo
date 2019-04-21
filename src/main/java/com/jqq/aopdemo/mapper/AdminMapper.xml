@@ -5,19 +5,22 @@
     <resultMap id="admin" type="com.jqq.aopdemo.entity.Admin" >
         <result column="id" property="id" />
         <result column="password" property="password" />
+        <result column="roles" property="roles" />
     </resultMap>
 
     <select id="selectAllAdmin" resultMap="admin">
         SELECT
         ID,
-        PASSWORD
+        PASSWORD,
+        ROLES
         FROM admin;
     </select>
 
     <select id="selectAdminById" resultMap="admin">
         SELECT
         id,
-        password
+        password,
+        roles
         FROM admin
         WHERE id= #{adminId};
     </select>
@@ -25,7 +28,8 @@
     <select id="selectAdmin" resultMap="admin">
         SELECT
         id,
-        password
+        password,
+        roles
         FROM admin
         WHERE id= #{adminId} AND password=#{password};
     </select>
