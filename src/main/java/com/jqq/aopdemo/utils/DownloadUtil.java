@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 public class DownloadUtil {
-    public void dowload(List<Alumni> logInfo) {
+    public void download(List<Alumni> logInfo) {
         String path = "D:/excel/汇总.xlsx";
         File excel = new File(path);
 

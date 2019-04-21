@@ -16,23 +16,24 @@ public class AdminDao {
     @Autowired
     private AdminMapper adminMapper;
 
-    public Integer initAdmins(List adminList){
+    public Integer initAdmins(List adminList) {
+
         return adminMapper.initAdmins(adminList);
     }
 
-    public List<Admin> selectAllAdmin(){
+    public List<Admin> selectAllAdmin() {
         return adminMapper.selectAllAdmin();
     }
 
-    public Admin selectAdminById(int adminId){
+    public Admin selectAdminById(int adminId) {
         return adminMapper.selectAdminById(adminId);
     }
 
-    public Admin selectAdmin(int adminId,String password){
-        return adminMapper.selectAdmin(adminId,password);
+    public Admin selectAdmin(int adminId, String password) {
+        return adminMapper.selectAdmin(adminId, password);
     }
 
-    public Integer deleteAllAdmin(){
+    public Integer deleteAllAdmin() {
         return adminMapper.deleteAllAdmin();
     }
 }

@@ -41,7 +41,6 @@ public class AlumniController {
     }
     @GetMapping("/{alumniId}")
     public Alumni selectAllAlumni(@PathVariable("alumniId") int alumniId){
-        System.out.println("alumni执行");
         return alumniDao.selectAlumniByID(alumniId);
     }
 
@@ -72,6 +71,6 @@ public class AlumniController {
 
     @PostMapping("/download")
     public void download(){
-        downloadUtil.dowload(alumniDao.selectAllAlumni());
+        downloadUtil.download(alumniDao.selectAllAlumni());
     }
 }

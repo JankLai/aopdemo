@@ -9,8 +9,8 @@
 
     <select id="selectAllAdmin" resultMap="admin">
         SELECT
-        id,
-        password
+        ID,
+        PASSWORD
         FROM admin;
     </select>
 

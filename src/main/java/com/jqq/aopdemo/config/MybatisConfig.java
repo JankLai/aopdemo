@@ -21,5 +21,5 @@ public class MybatisConfig {
         // 设置别名包
         sqlSessionFactoryBean.setTypeAliasesPackage("com.jqq.aopdemo.entity");
         return sqlSessionFactoryBean;
-    }
+}
 }

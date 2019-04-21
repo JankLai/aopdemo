@@ -6,9 +6,12 @@ import com.jqq.aopdemo.utils.UserlogUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.assertj.core.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -38,13 +41,15 @@ public class ServiceMonitor {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
 
+        //获取用户权限
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         // 记录下请求内容
         logger.info("URL : " + request.getRequestURL().toString());
         logger.info("HTTP_METHOD : " + request.getMethod());
         logger.info("IP : " + request.getRemoteAddr());
         logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
         logger.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
-
+        logger.info("用户权限有："+authentication.toString());
         Object[] ss=joinPoint.getArgs();
         List<String> logInfo=new ArrayList<>();
         logInfo.add(ss[0].toString());
@@ -113,6 +118,12 @@ public class ServiceMonitor {
     {
         List<String> logInfo=new ArrayList<>();
         Alumni alumni=(Alumni)joinPoint.getArgs()[1];
+        //获取用户权限
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        Object[] authorities= authentication.getAuthorities().toArray();
+        for(int i=0;i<authorities.length;i++){
+            logger.info("用户权限有："+String.valueOf(authorities[i]));
+        }
 
         logInfo.add(alumni.getName());
         logInfo.add(alumni.getSex());

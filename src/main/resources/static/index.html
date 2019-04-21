@@ -175,19 +175,22 @@
                     <p class="p1">录入员登录</p>
                 </div>
                 <!-- 输入框 -->
-                <div class="lgD">
-                    <!--<img src="img/logName.png" width="20" height="20" alt=""/>-->
-                    <input type="text" id="id"
-                        placeholder="输入用户名" />
-                </div>
-                <div class="lgD">
-                    <!--<img src="img/logPwd.png" width="20" height="20" alt=""/>-->
-                    <input type="password" id="password"
-                        placeholder="输入用户密码" />
-                </div>
-                <div class="logC">
-                    <a target="_self"><button id="btn">登 录</button></a>
-                </div>
+                <form action="/authentication/form" method="post">
+                    <div class="lgD">
+                        <!--<img src="img/logName.png" width="20" height="20" alt=""/>-->
+                        <input type="text" id="id" name="username"
+                               placeholder="输入用户名" />
+                    </div>
+                    <div class="lgD">
+                        <!--<img src="img/logPwd.png" width="20" height="20" alt=""/>-->
+                        <input type="password" id="password" name="password"
+                               placeholder="输入用户密码" />
+                    </div>
+                    <div class="logC">
+                        <a target="_self"><button id="btn" type="submit" name="submit">登 录</button></a>
+                    </div>
+                </form>
+
             </div>
     </div>
         
