@@ -25,6 +25,10 @@ public class UserPrincipal implements UserDetails {
 
         List<GrantedAuthority> roles=new ArrayList<>();
 
+        if(admin.getRoles()==null){
+            return Collections.singleton(new SimpleGrantedAuthority("Normal"));
+        }
+
         String[] ss=admin.getRoles().split(",");
         for(String s:ss){
             roles.add(new SimpleGrantedAuthority(s));

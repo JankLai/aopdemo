@@ -17,6 +17,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,36 +36,36 @@ public class ServiceMonitor {
 
     private Logger logger=LoggerFactory.getLogger(ServiceMonitor.class);
 
-    @Around("execution(* com.jqq.aopdemo.controller.AdminController.selectAdmin(..))")
-    public Object login(ProceedingJoinPoint joinPoint) throws Throwable
-    {
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-
-        //获取用户权限
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        // 记录下请求内容
-        logger.info("URL : " + request.getRequestURL().toString());
-        logger.info("HTTP_METHOD : " + request.getMethod());
-        logger.info("IP : " + request.getRemoteAddr());
-        logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-        logger.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
-        logger.info("用户权限有："+authentication.toString());
-        Object[] ss=joinPoint.getArgs();
-        List<String> logInfo=new ArrayList<>();
-        logInfo.add(ss[0].toString());
-        SimpleDateFormat sdf=new SimpleDateFormat();
-        sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
-        Date date=new Date();
-        String time=sdf.format(date);
-        logInfo.add(time);
-
-        userlogUtil.userlog(logInfo);
-
-
-        Object result=joinPoint.proceed();
-        return  result;
-    }
+//    @Around("execution(* com.jqq.aopdemo.controller.AdminController.selectAdmin(..))")
+//    public Object login(ProceedingJoinPoint joinPoint) throws Throwable
+//    {
+//        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//        HttpServletRequest request = attributes.getRequest();
+//
+//        //获取用户权限
+//        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+//        // 记录下请求内容
+//        logger.info("URL : " + request.getRequestURL().toString());
+//        logger.info("HTTP_METHOD : " + request.getMethod());
+//        logger.info("IP : " + request.getRemoteAddr());
+//        logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+//        logger.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
+//        logger.info("用户权限有："+authentication.toString());
+//        Object[] ss=joinPoint.getArgs();
+//        List<String> logInfo=new ArrayList<>();
+//        logInfo.add(ss[0].toString());
+//        SimpleDateFormat sdf=new SimpleDateFormat();
+//        sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
+//        Date date=new Date();
+//        String time=sdf.format(date);
+//        logInfo.add(time);
+//
+//        userlogUtil.userlog(logInfo);
+//
+//
+//        Object result=joinPoint.proceed();
+//        return  result;
+//    }
     @Around("execution(* com.jqq.aopdemo.controller.AdminController.logout(..))")
     public void logAroundAllMethods(ProceedingJoinPoint joinPoint) throws Throwable
     {
@@ -143,6 +144,39 @@ public class ServiceMonitor {
         } finally {
             //Do Something useful, If you have
         }
+    }
+
+    /**
+     * 3.1 对于所有Alumni的查询操作，验证用户已经登录；如果用户没有登录，先导航到登录界面。
+     * @param joinPoint
+     * @return
+     * @throws Throwable
+     */
+    @Around("execution(* com.jqq.aopdemo.controller.AlumniController.selectAlumni(..))")
+    public Object selectCheck(ProceedingJoinPoint joinPoint) throws Throwable
+    {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        HttpServletResponse response = attributes.getResponse();
+
+        //获取用户权限
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        Object[] authorities= authentication.getAuthorities().toArray();
+        if(String.valueOf(authorities[0]).equals("ROLE_ANONYMOUS")){
+            logger.info("该用户未登录");
+
+//            String path=request.getContextPath();
+//            response.sendRedirect("/index");
+//            response.getWriter("<script>window.location.href='index.html'</script>");
+            Alumni alumni=new Alumni();
+            alumni.setId(-1);
+            return alumni;
+        }
+
+
+        Object result=joinPoint.proceed();
+
+        return  result;
     }
 
 }

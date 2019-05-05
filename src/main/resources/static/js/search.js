@@ -16,7 +16,8 @@ function bind(){
                 type: "GET",
                 url: "/alumni/"+alumniID,
                 success: function (data) {
-                    if(data!=null&&data!=""){
+
+                    if(data!=null&&data!=""&&data.id!=-1){
                         $("#name").val(data.name);
                         $("#sex").val(data.sex);
                         $("#bir").val(data.birthday);
@@ -29,6 +30,10 @@ function bind(){
                         $("#email").val(data.email);
                         $("#wechat").val(data.wechat);
 
+                    }
+                    else if(data.id==-1){
+                        alert(data.id)
+                        window.location.href="index.html";
                     }
                     else{
                         alert("无此ID!")
@@ -47,6 +52,7 @@ function bind(){
                 },
                 error:function () {
                     alert("出现错误!!");
+                    window.location.href="index.html";
                 }
             });
         }
@@ -62,7 +68,7 @@ function bindSearch() {
             type: "GET",
             url: "/alumni/"+alumniID,
             success: function (data) {
-                if(data!=null&&data!=""){
+                if(data!=null&&data!=""&&data.id!=-1){
                     $("#name").val(data.name);
                     $("#sex").val(data.sex);
                     $("#bir").val(data.birthday);
@@ -75,6 +81,9 @@ function bindSearch() {
                     $("#email").val(data.email);
                     $("#wechat").val(data.wechat);
 
+                }
+                else if(data.id==-1){
+                    window.location.href="index.html";
                 }
                 else{
                     alert("无此ID!")

@@ -40,7 +40,7 @@ public class AlumniController {
         return alumniDao.selectAllAlumni();
     }
     @GetMapping("/{alumniId}")
-    public Alumni selectAllAlumni(@PathVariable("alumniId") int alumniId){
+    public Alumni selectAlumni(@PathVariable("alumniId") int alumniId){
         return alumniDao.selectAlumniByID(alumniId);
     }
 
